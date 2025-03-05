@@ -14,7 +14,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    return;
+    Future.delayed(
+      const Duration(seconds: 3),
+      () {
+        if (mounted) {
+          context.go(AppRoutes.landing);
+        }
+      },
+    );
   }
 
   @override

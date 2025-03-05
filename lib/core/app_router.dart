@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:flutter/material.dart';
 import '../presentation/screens/splash_screen.dart';
 import '../presentation/screens/landing_screen.dart';
 
@@ -15,6 +14,10 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.splash,
         builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.landing,
+        builder: (context, state) => const LandingScreen(),
       ),
     ],
   );
