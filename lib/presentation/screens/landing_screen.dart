@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pragma_cat_api_test/core/app_router.dart';
 
 class LandingScreen extends ConsumerStatefulWidget {
   const LandingScreen({super.key});
@@ -25,12 +27,12 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
   }
 
   SliverList _buildResultList() {
-    return SliverList(
+    return SliverList( 
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           return InkWell(
             onTap: () {
-              //TODO: Navegar a mas detalles
+              context.push('${AppRoutes.detail}/$index');
             },
             child: Card(
               margin: const EdgeInsets.all(16),
