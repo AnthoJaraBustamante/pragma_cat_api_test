@@ -38,8 +38,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const Spacer(),
-            //TODO: Cambiar por imagen de un gato
-            const FlutterLogo(size: 150),
+            Image.asset('assets/cat_logo.png', height: 300),
             SizedBox(height: size.height * 0.1),
           ],
         ),
