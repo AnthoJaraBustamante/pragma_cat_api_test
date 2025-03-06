@@ -19,11 +19,12 @@ mixin _$Breed {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get temperament => throw _privateConstructorUsedError;
+  int get intelligence => throw _privateConstructorUsedError;
   String get origin => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get countryCode => throw _privateConstructorUsedError;
   Weight get weight => throw _privateConstructorUsedError;
-  Image get image => throw _privateConstructorUsedError;
+  BreedImage? get image => throw _privateConstructorUsedError;
 
   /// Create a copy of Breed
   /// with the given fields replaced by the non-null parameter values.
@@ -40,14 +41,15 @@ abstract class $BreedCopyWith<$Res> {
       {String id,
       String name,
       String temperament,
+      int intelligence,
       String origin,
       String description,
       String countryCode,
       Weight weight,
-      Image image});
+      BreedImage? image});
 
   $WeightCopyWith<$Res> get weight;
-  $ImageCopyWith<$Res> get image;
+  $BreedImageCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -68,11 +70,12 @@ class _$BreedCopyWithImpl<$Res, $Val extends Breed>
     Object? id = null,
     Object? name = null,
     Object? temperament = null,
+    Object? intelligence = null,
     Object? origin = null,
     Object? description = null,
     Object? countryCode = null,
     Object? weight = null,
-    Object? image = null,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -87,6 +90,10 @@ class _$BreedCopyWithImpl<$Res, $Val extends Breed>
           ? _value.temperament
           : temperament // ignore: cast_nullable_to_non_nullable
               as String,
+      intelligence: null == intelligence
+          ? _value.intelligence
+          : intelligence // ignore: cast_nullable_to_non_nullable
+              as int,
       origin: null == origin
           ? _value.origin
           : origin // ignore: cast_nullable_to_non_nullable
@@ -103,10 +110,10 @@ class _$BreedCopyWithImpl<$Res, $Val extends Breed>
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as Weight,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as Image,
+              as BreedImage?,
     ) as $Val);
   }
 
@@ -124,8 +131,12 @@ class _$BreedCopyWithImpl<$Res, $Val extends Breed>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ImageCopyWith<$Res> get image {
-    return $ImageCopyWith<$Res>(_value.image, (value) {
+  $BreedImageCopyWith<$Res>? get image {
+    if (_value.image == null) {
+      return null;
+    }
+
+    return $BreedImageCopyWith<$Res>(_value.image!, (value) {
       return _then(_value.copyWith(image: value) as $Val);
     });
   }
@@ -142,16 +153,17 @@ abstract class _$$BreedImplCopyWith<$Res> implements $BreedCopyWith<$Res> {
       {String id,
       String name,
       String temperament,
+      int intelligence,
       String origin,
       String description,
       String countryCode,
       Weight weight,
-      Image image});
+      BreedImage? image});
 
   @override
   $WeightCopyWith<$Res> get weight;
   @override
-  $ImageCopyWith<$Res> get image;
+  $BreedImageCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -170,11 +182,12 @@ class __$$BreedImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? temperament = null,
+    Object? intelligence = null,
     Object? origin = null,
     Object? description = null,
     Object? countryCode = null,
     Object? weight = null,
-    Object? image = null,
+    Object? image = freezed,
   }) {
     return _then(_$BreedImpl(
       id: null == id
@@ -189,6 +202,10 @@ class __$$BreedImplCopyWithImpl<$Res>
           ? _value.temperament
           : temperament // ignore: cast_nullable_to_non_nullable
               as String,
+      intelligence: null == intelligence
+          ? _value.intelligence
+          : intelligence // ignore: cast_nullable_to_non_nullable
+              as int,
       origin: null == origin
           ? _value.origin
           : origin // ignore: cast_nullable_to_non_nullable
@@ -205,10 +222,10 @@ class __$$BreedImplCopyWithImpl<$Res>
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as Weight,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as Image,
+              as BreedImage?,
     ));
   }
 }
@@ -220,6 +237,7 @@ class _$BreedImpl implements _Breed {
       {required this.id,
       required this.name,
       required this.temperament,
+      required this.intelligence,
       required this.origin,
       required this.description,
       required this.countryCode,
@@ -233,6 +251,8 @@ class _$BreedImpl implements _Breed {
   @override
   final String temperament;
   @override
+  final int intelligence;
+  @override
   final String origin;
   @override
   final String description;
@@ -241,11 +261,11 @@ class _$BreedImpl implements _Breed {
   @override
   final Weight weight;
   @override
-  final Image image;
+  final BreedImage? image;
 
   @override
   String toString() {
-    return 'Breed(id: $id, name: $name, temperament: $temperament, origin: $origin, description: $description, countryCode: $countryCode, weight: $weight, image: $image)';
+    return 'Breed(id: $id, name: $name, temperament: $temperament, intelligence: $intelligence, origin: $origin, description: $description, countryCode: $countryCode, weight: $weight, image: $image)';
   }
 
   @override
@@ -257,6 +277,8 @@ class _$BreedImpl implements _Breed {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.temperament, temperament) ||
                 other.temperament == temperament) &&
+            (identical(other.intelligence, intelligence) ||
+                other.intelligence == intelligence) &&
             (identical(other.origin, origin) || other.origin == origin) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -267,8 +289,8 @@ class _$BreedImpl implements _Breed {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, temperament, origin,
-      description, countryCode, weight, image);
+  int get hashCode => Object.hash(runtimeType, id, name, temperament,
+      intelligence, origin, description, countryCode, weight, image);
 
   /// Create a copy of Breed
   /// with the given fields replaced by the non-null parameter values.
@@ -284,11 +306,12 @@ abstract class _Breed implements Breed {
       {required final String id,
       required final String name,
       required final String temperament,
+      required final int intelligence,
       required final String origin,
       required final String description,
       required final String countryCode,
       required final Weight weight,
-      required final Image image}) = _$BreedImpl;
+      required final BreedImage? image}) = _$BreedImpl;
 
   @override
   String get id;
@@ -296,6 +319,8 @@ abstract class _Breed implements Breed {
   String get name;
   @override
   String get temperament;
+  @override
+  int get intelligence;
   @override
   String get origin;
   @override
@@ -305,7 +330,7 @@ abstract class _Breed implements Breed {
   @override
   Weight get weight;
   @override
-  Image get image;
+  BreedImage? get image;
 
   /// Create a copy of Breed
   /// with the given fields replaced by the non-null parameter values.
@@ -460,37 +485,39 @@ abstract class _Weight implements Weight {
 }
 
 /// @nodoc
-mixin _$Image {
+mixin _$BreedImage {
   String get id => throw _privateConstructorUsedError;
   int get width => throw _privateConstructorUsedError;
   int get height => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
 
-  /// Create a copy of Image
+  /// Create a copy of BreedImage
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ImageCopyWith<Image> get copyWith => throw _privateConstructorUsedError;
+  $BreedImageCopyWith<BreedImage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ImageCopyWith<$Res> {
-  factory $ImageCopyWith(Image value, $Res Function(Image) then) =
-      _$ImageCopyWithImpl<$Res, Image>;
+abstract class $BreedImageCopyWith<$Res> {
+  factory $BreedImageCopyWith(
+          BreedImage value, $Res Function(BreedImage) then) =
+      _$BreedImageCopyWithImpl<$Res, BreedImage>;
   @useResult
   $Res call({String id, int width, int height, String url});
 }
 
 /// @nodoc
-class _$ImageCopyWithImpl<$Res, $Val extends Image>
-    implements $ImageCopyWith<$Res> {
-  _$ImageCopyWithImpl(this._value, this._then);
+class _$BreedImageCopyWithImpl<$Res, $Val extends BreedImage>
+    implements $BreedImageCopyWith<$Res> {
+  _$BreedImageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Image
+  /// Create a copy of BreedImage
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -522,24 +549,25 @@ class _$ImageCopyWithImpl<$Res, $Val extends Image>
 }
 
 /// @nodoc
-abstract class _$$ImageImplCopyWith<$Res> implements $ImageCopyWith<$Res> {
-  factory _$$ImageImplCopyWith(
-          _$ImageImpl value, $Res Function(_$ImageImpl) then) =
-      __$$ImageImplCopyWithImpl<$Res>;
+abstract class _$$BreedImageImplCopyWith<$Res>
+    implements $BreedImageCopyWith<$Res> {
+  factory _$$BreedImageImplCopyWith(
+          _$BreedImageImpl value, $Res Function(_$BreedImageImpl) then) =
+      __$$BreedImageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, int width, int height, String url});
 }
 
 /// @nodoc
-class __$$ImageImplCopyWithImpl<$Res>
-    extends _$ImageCopyWithImpl<$Res, _$ImageImpl>
-    implements _$$ImageImplCopyWith<$Res> {
-  __$$ImageImplCopyWithImpl(
-      _$ImageImpl _value, $Res Function(_$ImageImpl) _then)
+class __$$BreedImageImplCopyWithImpl<$Res>
+    extends _$BreedImageCopyWithImpl<$Res, _$BreedImageImpl>
+    implements _$$BreedImageImplCopyWith<$Res> {
+  __$$BreedImageImplCopyWithImpl(
+      _$BreedImageImpl _value, $Res Function(_$BreedImageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Image
+  /// Create a copy of BreedImage
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -549,7 +577,7 @@ class __$$ImageImplCopyWithImpl<$Res>
     Object? height = null,
     Object? url = null,
   }) {
-    return _then(_$ImageImpl(
+    return _then(_$BreedImageImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -572,8 +600,8 @@ class __$$ImageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ImageImpl implements _Image {
-  _$ImageImpl(
+class _$BreedImageImpl implements _BreedImage {
+  _$BreedImageImpl(
       {required this.id,
       required this.width,
       required this.height,
@@ -590,14 +618,14 @@ class _$ImageImpl implements _Image {
 
   @override
   String toString() {
-    return 'Image(id: $id, width: $width, height: $height, url: $url)';
+    return 'BreedImage(id: $id, width: $width, height: $height, url: $url)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ImageImpl &&
+            other is _$BreedImageImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.width, width) || other.width == width) &&
             (identical(other.height, height) || other.height == height) &&
@@ -607,21 +635,21 @@ class _$ImageImpl implements _Image {
   @override
   int get hashCode => Object.hash(runtimeType, id, width, height, url);
 
-  /// Create a copy of Image
+  /// Create a copy of BreedImage
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
-      __$$ImageImplCopyWithImpl<_$ImageImpl>(this, _$identity);
+  _$$BreedImageImplCopyWith<_$BreedImageImpl> get copyWith =>
+      __$$BreedImageImplCopyWithImpl<_$BreedImageImpl>(this, _$identity);
 }
 
-abstract class _Image implements Image {
-  factory _Image(
+abstract class _BreedImage implements BreedImage {
+  factory _BreedImage(
       {required final String id,
       required final int width,
       required final int height,
-      required final String url}) = _$ImageImpl;
+      required final String url}) = _$BreedImageImpl;
 
   @override
   String get id;
@@ -632,10 +660,10 @@ abstract class _Image implements Image {
   @override
   String get url;
 
-  /// Create a copy of Image
+  /// Create a copy of BreedImage
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
+  _$$BreedImageImplCopyWith<_$BreedImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
