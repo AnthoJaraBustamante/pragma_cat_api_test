@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pragma_cat_api_test/core/app_router.dart';
+import 'package:pragma_cat_api_test/data/models/breed.dart';
 import 'package:pragma_cat_api_test/data/providers/breeds_provider.dart';
+import 'package:pragma_cat_api_test/presentation/widgets/breed_image.dart';
 
 class LandingScreen extends ConsumerStatefulWidget {
   const LandingScreen({super.key});
@@ -16,39 +18,47 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final breedsProvider = ref.watch(breedsStateProvider);
+    final breedsState = ref.watch(breedsStateProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: TextButton(
-          onPressed: () {
-            ref.invalidate(breedsStateProvider);
-          },
-          child: const Text('refresh'),
-        ),
-      ),
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: CustomScrollView(
-        slivers: [
-          _buildSliverAppBar(),
-          breedsProvider.when(
-            data: (data) => _buildResultList(),
-            error: (error, stack) => SliverToBoxAdapter(
-              child: Text('Error: $error'),
-            ),
-            loading: () => const SliverToBoxAdapter(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          ref.invalidate(breedsStateProvider);
+        },
+        child: CustomScrollView(
+          slivers: [
+            _buildSliverAppBar(),
+            breedsState.when(
+              skipLoadingOnRefresh: false,
+              data: (data) => _buildResultList(data),
+              error: (error, stack) => const SliverFillRemaining(
                 child: Center(
-              child: CircularProgressIndicator(),
-            )),
-          ),
-        ],
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Ocurrió un error al cargar las razas'),
+                  ),
+                ),
+              ),
+              loading: () => const SliverFillRemaining(
+                  child: Center(
+                child: CircularProgressIndicator(),
+              )),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  SliverList _buildResultList() {
+  SliverList _buildResultList(List<Breed> data) {
+    final filteredBreeds = data
+        .where((breed) => breed.name
+            .toLowerCase()
+            .contains(_searchController.text.toLowerCase()))
+        .toList();
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
+          final breed = filteredBreeds[index];
           return InkWell(
             onTap: () {
               context.push('${AppRoutes.detail}/$index');
@@ -66,19 +76,20 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                   children: [
                     Row(
                       children: [
-                        Text('Nombre Raza $index'),
+                        Text(breed.name),
                         const Spacer(),
                         const Text('Más...'),
                       ],
                     ),
-                    const FlutterLogo(
-                      size: 150,
+                    BreedImageWidget(
+                      imageUrl: '${breed.image?.url}',
+                      height: 300,
                     ),
-                    const Row(
+                    Row(
                       children: [
-                        Text('Pais de origen'),
-                        Spacer(),
-                        Text('Inteligencia'),
+                        Text(breed.origin),
+                        const Spacer(),
+                        Text('Inteligencia: ${breed.intelligence}'),
                       ],
                     )
                   ],
@@ -87,7 +98,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
             ),
           );
         },
-        childCount: 20,
+        childCount: filteredBreeds.length,
       ),
     );
   }
@@ -112,7 +123,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                 ),
               ),
               onChanged: (value) {
-                //TODO: Actualizar segun busqueda
+                setState(() {});
               },
             ),
           ],
