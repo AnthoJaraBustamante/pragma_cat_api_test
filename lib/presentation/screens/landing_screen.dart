@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pragma_cat_api_test/core/app_router.dart';
+import 'package:pragma_cat_api_test/data/providers/breeds_provider.dart';
 
 class LandingScreen extends ConsumerStatefulWidget {
   const LandingScreen({super.key});
@@ -15,19 +16,37 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final breedsProvider = ref.watch(breedsStateProvider);
     return Scaffold(
+      appBar: AppBar(
+        title: TextButton(
+          onPressed: () {
+            ref.invalidate(breedsStateProvider);
+          },
+          child: const Text('refresh'),
+        ),
+      ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: CustomScrollView(
         slivers: [
           _buildSliverAppBar(),
-          _buildResultList(),
+          breedsProvider.when(
+            data: (data) => _buildResultList(),
+            error: (error, stack) => SliverToBoxAdapter(
+              child: Text('Error: $error'),
+            ),
+            loading: () => const SliverToBoxAdapter(
+                child: Center(
+              child: CircularProgressIndicator(),
+            )),
+          ),
         ],
       ),
     );
   }
 
   SliverList _buildResultList() {
-    return SliverList( 
+    return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           return InkWell(
