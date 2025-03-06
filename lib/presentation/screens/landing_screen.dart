@@ -61,7 +61,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
           final breed = filteredBreeds[index];
           return InkWell(
             onTap: () {
-              context.push('${AppRoutes.detail}/$index');
+              context.push('${AppRoutes.detail}/${breed.id}');
             },
             child: Card(
               margin: const EdgeInsets.all(16),
@@ -82,6 +82,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                       ],
                     ),
                     BreedImageWidget(
+                      tag: breed.id,
                       imageUrl: '${breed.image?.url}',
                       height: 300,
                     ),
