@@ -18,10 +18,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Catbreeds',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       routerConfig: AppRouter.router,
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.dark,
     );
   }
 }
