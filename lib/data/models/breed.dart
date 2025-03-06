@@ -17,6 +17,7 @@
       required String countryCode,
       required Weight weight,
       required BreedImage? image,
+      required String lifeSpan,
     }) = _Breed;
 
     factory Breed.fromJson(Map<String, dynamic> json) => _$BreedFromJson(json);

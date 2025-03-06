@@ -25,6 +25,7 @@ mixin _$Breed {
   String get countryCode => throw _privateConstructorUsedError;
   Weight get weight => throw _privateConstructorUsedError;
   BreedImage? get image => throw _privateConstructorUsedError;
+  String get lifeSpan => throw _privateConstructorUsedError;
 
   /// Create a copy of Breed
   /// with the given fields replaced by the non-null parameter values.
@@ -46,7 +47,8 @@ abstract class $BreedCopyWith<$Res> {
       String description,
       String countryCode,
       Weight weight,
-      BreedImage? image});
+      BreedImage? image,
+      String lifeSpan});
 
   $WeightCopyWith<$Res> get weight;
   $BreedImageCopyWith<$Res>? get image;
@@ -76,6 +78,7 @@ class _$BreedCopyWithImpl<$Res, $Val extends Breed>
     Object? countryCode = null,
     Object? weight = null,
     Object? image = freezed,
+    Object? lifeSpan = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -114,6 +117,10 @@ class _$BreedCopyWithImpl<$Res, $Val extends Breed>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as BreedImage?,
+      lifeSpan: null == lifeSpan
+          ? _value.lifeSpan
+          : lifeSpan // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -158,7 +165,8 @@ abstract class _$$BreedImplCopyWith<$Res> implements $BreedCopyWith<$Res> {
       String description,
       String countryCode,
       Weight weight,
-      BreedImage? image});
+      BreedImage? image,
+      String lifeSpan});
 
   @override
   $WeightCopyWith<$Res> get weight;
@@ -188,6 +196,7 @@ class __$$BreedImplCopyWithImpl<$Res>
     Object? countryCode = null,
     Object? weight = null,
     Object? image = freezed,
+    Object? lifeSpan = null,
   }) {
     return _then(_$BreedImpl(
       id: null == id
@@ -226,6 +235,10 @@ class __$$BreedImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as BreedImage?,
+      lifeSpan: null == lifeSpan
+          ? _value.lifeSpan
+          : lifeSpan // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -242,7 +255,8 @@ class _$BreedImpl implements _Breed {
       required this.description,
       required this.countryCode,
       required this.weight,
-      required this.image});
+      required this.image,
+      required this.lifeSpan});
 
   @override
   final String id;
@@ -262,10 +276,12 @@ class _$BreedImpl implements _Breed {
   final Weight weight;
   @override
   final BreedImage? image;
+  @override
+  final String lifeSpan;
 
   @override
   String toString() {
-    return 'Breed(id: $id, name: $name, temperament: $temperament, intelligence: $intelligence, origin: $origin, description: $description, countryCode: $countryCode, weight: $weight, image: $image)';
+    return 'Breed(id: $id, name: $name, temperament: $temperament, intelligence: $intelligence, origin: $origin, description: $description, countryCode: $countryCode, weight: $weight, image: $image, lifeSpan: $lifeSpan)';
   }
 
   @override
@@ -285,12 +301,14 @@ class _$BreedImpl implements _Breed {
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
             (identical(other.weight, weight) || other.weight == weight) &&
-            (identical(other.image, image) || other.image == image));
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.lifeSpan, lifeSpan) ||
+                other.lifeSpan == lifeSpan));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, name, temperament,
-      intelligence, origin, description, countryCode, weight, image);
+      intelligence, origin, description, countryCode, weight, image, lifeSpan);
 
   /// Create a copy of Breed
   /// with the given fields replaced by the non-null parameter values.
@@ -311,7 +329,8 @@ abstract class _Breed implements Breed {
       required final String description,
       required final String countryCode,
       required final Weight weight,
-      required final BreedImage? image}) = _$BreedImpl;
+      required final BreedImage? image,
+      required final String lifeSpan}) = _$BreedImpl;
 
   @override
   String get id;
@@ -331,6 +350,8 @@ abstract class _Breed implements Breed {
   Weight get weight;
   @override
   BreedImage? get image;
+  @override
+  String get lifeSpan;
 
   /// Create a copy of Breed
   /// with the given fields replaced by the non-null parameter values.

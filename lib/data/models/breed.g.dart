@@ -18,6 +18,7 @@ Breed _$BreedFromJson(Map<String, dynamic> json) => Breed(
       image: json['image'] == null
           ? null
           : BreedImage.fromJson(json['image'] as Map<String, dynamic>),
+      lifeSpan: json['life_span'] as String,
     );
 
 Map<String, dynamic> _$BreedToJson(Breed instance) => <String, dynamic>{
@@ -30,6 +31,7 @@ Map<String, dynamic> _$BreedToJson(Breed instance) => <String, dynamic>{
       'country_code': instance.countryCode,
       'weight': instance.weight,
       'image': instance.image,
+      'life_span': instance.lifeSpan,
     };
 
 Weight _$WeightFromJson(Map<String, dynamic> json) => Weight(
